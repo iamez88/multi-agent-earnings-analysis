@@ -1,0 +1,44 @@
+$schema: ../../schema/mcp-agent.config.schema.json
+
+execution_engine: asyncio
+logger:
+  transports: [console, file]
+  level: debug
+  show_progress: true
+
+mcp:
+  servers:
+    brave:
+      command: "cmd"
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-brave-search"]
+    playwright:
+      command: "cmd"
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@executeautomation/playwright-mcp-server"]
+    fetch:
+      command: "uvx"
+      args: ["mcp-server-fetch"]
+    filesystem:
+      command: "cmd"
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem"]
+
+openai:
+  # Secrets (API keys, etc.) are stored in an mcp_agent.secrets.yaml file which can be gitignored
+  default_model: o3-mini
+  reasoning_effort: high
+
+anthropic:
+  # Secrets (API keys, etc.) are stored in an mcp_agent.secrets.yaml file which can be gitignored
+  default_model: claude-3-5-haiku-20241022
+  reasoning_effort: high
